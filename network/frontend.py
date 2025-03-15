@@ -5,7 +5,7 @@ from diagrams.aws.storage import S3
 from diagrams.aws.network import CF
 from diagrams.onprem.monitoring import Sentry
 
-with Diagram("", show=False):
+with Diagram("", show=False, filename="frontend"):
     with Cluster("Frontend"):
         app = AppRunner("Frontend App")
         CF("Cloudfront") >> [

@@ -27,7 +27,7 @@ No se pidió en el enunciado que se agregara nada específico para el monitoreo 
 
 Teniendo esto en cuenta, se diseñó el diagrama de esta parte de la red, quedando el mismo de la siguiente forma:
 
-
+![diagrama de red de frontend](images/frontend.png)
 
 # Referencias
 
