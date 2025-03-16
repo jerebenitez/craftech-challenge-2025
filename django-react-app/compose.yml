@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16.8-alpine3.20
+    restart: always
+    shm_size: 128m
+    env_file: .env.postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+
+volumes:
+  db:
