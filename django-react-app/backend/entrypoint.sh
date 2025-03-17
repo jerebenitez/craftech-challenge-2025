@@ -22,8 +22,14 @@ python manage.py flush --no-input
 python manage.py migrate
 python manage.py loaddata initial_data.json
 # python manage.py collectstatic --noinput
-python manage.py runserver 0.0.0.0:8000
 
-
+# Check if ENVIRONMENT is set to "PRODUCTION"
+if [ "$ENVIRONMENT" = "PRODUCTION" ]; then
+    echo "Running in PRODUCTION mode"
+    exec gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 3
+else
+    echo "Running in DEVELOPMENT mode"
+    exec python manage.py runserver 0.0.0.0:8000
+fi
 
 exec "$@"

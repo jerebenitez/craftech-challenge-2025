@@ -1,14 +1,25 @@
 services:
+  # En caso de usar una base de datos externa, borrar este servicio
   db:
     image: postgres:16.8-alpine3.20
     restart: always
     shm_size: 128m
-    env_file: .env.postgres
+    env_file: ./.env
     ports:
       - "5432:5432"
     volumes:
       - db:/var/lib/postgresql/data
 
+  api:
+    build: backend/
+    # En caso de usar una base de datos externa, borrar esto
+    depends_on:
+      - db
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
 
 volumes:
   db:
