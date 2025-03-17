@@ -15,7 +15,7 @@ services:
     # En caso de usar una base de datos externa, borrar esto
     depends_on:
       - db
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./.env
     ports:
@@ -26,9 +26,20 @@ services:
     # Uncomment this if you want the 'front' service to wait for the 'api' one
     # depends_on:
     #   - api
-    restart: always
+    restart: unless-stopped
     ports:
       - "3000:80"
+
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
 volumes:
   db:
