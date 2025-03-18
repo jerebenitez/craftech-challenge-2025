@@ -22,7 +22,7 @@ jobs:
 
       - uses: docker/build-push-action@v6
         with:
-          file: Dockerfile
-          context: .
+          file: CI-CD/Dockerfile
+          context: CI-CD/
           push: true
           tags: jerebenitez/cicd-craftech:${{ github.sha }}
