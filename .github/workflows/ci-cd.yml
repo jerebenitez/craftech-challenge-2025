@@ -5,7 +5,7 @@ on:
     branches:
       - main
     path:
-      - 'CI-CD/index.html'
+      - 'index.html'
 
 jobs:
   build:
