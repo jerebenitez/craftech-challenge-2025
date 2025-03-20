@@ -15,19 +15,8 @@ El diagrama debe hacer un mejor uso de las soluciones distribuidas.
 
 Para la solución de este apartado, se eligió deployar el sistema en AWS.
 
-Se comenzó armando el diagrama para el front. A pesar de que no se detalla en el enunciado, se asume que se utilizará:
-- Cloudfront como CDN
-- S3 para almacenamiento de archivos estáticos
-- Una instancia de [App Runner](https://aws.amazon.com/es/apprunner/) para la aplicación en sí
-    - Se eligió este servicio dado que se encarga de escalar automáticamente según el tráfico, y equilibra la carga del mismo. Probablemente hayan formas más baratas/eficientes de lograr esto, se eligió esta forma porque fue lo que se encontró googleando y, aparentemente, cumple con los requerimientos pedidos (escalabilidad y disponibilidad)
-- Sentry para monitoreo
-- PostHog para analytics
+El frontend se decidió deployarlo en Amplify, dado que se encontró que era un servicio específico de AWS para esto. No se llegó a ver la diferencia entre esto y correrlo, por ejemplo, en una instancia de App Runner, y se eligió frente a hostear el front en EC2 principalmente por una cuestión de facilidad de uso/configuración, aunque se entiende que tiene ciertas limitaciones y que probablemente sea más caro que esta opción.
 
-No se pidió en el enunciado que se agregara nada específico para el monitoreo ni las analytics en el front, pero se agregó de todas formas. Se eligieron Sentry y PostHog por familiaridad previa, y por dar ambas la posibilidad de usar el servicio provisto por las empresas o self-hostearlas según las necesidades del cliente.
+Luego, este front se conectaría, mediante el API Gateway, al backend. Para la app en sí se eligió Elastic Beanstalk ya que se encarga automáticamente del escalado y la provisión de recursos. El mismo se conectó a DynamoDB para la base NoSQL y a RDS para la SQL. A su ves este se conecta a los dos microservicios externos, se asume, mediante otro API Gateway. Los microservicios en sí fueron representados como clusters de EC2, aunque esto no es tan importante para el gráfico, ya que los mismos son externos
 
-Teniendo esto en cuenta, se diseñó el diagrama de esta parte de la red, quedando el mismo de la siguiente forma:
-
-![diagrama de red de frontend](images/frontend.png)
-
-# Referencias
-
+En sí, siempre se buscaron servicios que cumplieran con los requerimientos no funcionales automáticamente por una cuestión de falta de familiaridad con todo el abanico de servicios de AWS.
