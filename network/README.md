@@ -20,3 +20,13 @@ El frontend se decidió deployarlo en Amplify, dado que se encontró que era un 
 Luego, este front se conectaría, mediante el API Gateway, al backend. Para la app en sí se eligió Elastic Beanstalk ya que se encarga automáticamente del escalado y la provisión de recursos. El mismo se conectó a DynamoDB para la base NoSQL y a RDS para la SQL. A su ves este se conecta a los dos microservicios externos, se asume, mediante otro API Gateway. Los microservicios en sí fueron representados como clusters de EC2, aunque esto no es tan importante para el gráfico, ya que los mismos son externos
 
 En sí, siempre se buscaron servicios que cumplieran con los requerimientos no funcionales automáticamente por una cuestión de falta de familiaridad con todo el abanico de servicios de AWS.
+
+El diagrama final se puede observar a continuación:
+
+![diagrama de red](network_diagram.png)
+
+# Posibles mejoras
+
+- Al frontend se le podría agregar [Sentry](https://sentry.io/welcome/) y [PostHog](https://posthog.com/) para monitoreo y analytics respectivamente.
+- Al back se le podría agregar Graphana, Prometheus, etc para monitoreo/logging.
+- Se usó [Diagrams](https://diagrams.mingrammer.com/) bajo la hipótesis de que tener el diagrama en código sería útil/cómodo. Hasta cierto punto lo fue, pero el módulo deja mucho que desear. Se podría rehacer el diagrama en lucidchart y emprolijar un poco.
